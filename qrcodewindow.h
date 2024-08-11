@@ -17,10 +17,12 @@ public:
 private:
     QTextEdit* userInput;
     QPushButton* generateButton;
+    QPushButton* saveButton;
     QLabel* qrCodeLabel;
 
 private slots:
     void generateQrCode();
+    void saveQrCode();
 
 };
 #endif // QRCODEWINDOW_H
