@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <algorithm> // for checking if string is all whitespace
 
 QrCodeWindow::QrCodeWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -65,8 +66,11 @@ QrCodeWindow::QrCodeWindow(QWidget *parent)
 void QrCodeWindow::generateQrCode()
 {
     //get the user data
-    if(userInput->toPlainText().isEmpty())
+    if(userInput->toPlainText().isEmpty() || isStringAllWhiteSpace(userInput->toPlainText()))
+    {
+        QMessageBox::warning(this, "Empty input", "Enter Input before pressing Generate");
         return;
+    }
 
     QString qrcodeData = userInput->toPlainText();
    // qrCodeLabel->setText(qrcodeData);
@@ -135,6 +139,12 @@ void QrCodeWindow::saveQrCode()
     }
 
 
+}
+
+bool QrCodeWindow::isStringAllWhiteSpace(const QString& str)
+{
+    QString trimmedStr = str.trimmed();
+    return trimmedStr.isEmpty();
 }
 
 QrCodeWindow::~QrCodeWindow() {

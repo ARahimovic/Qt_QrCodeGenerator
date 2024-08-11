@@ -20,6 +20,7 @@ private:
     QPushButton* saveButton;
     QLabel* qrCodeLabel;
 
+    bool isStringAllWhiteSpace(const QString& str);
 private slots:
     void generateQrCode();
     void saveQrCode();
